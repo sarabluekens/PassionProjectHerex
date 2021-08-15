@@ -36,4 +36,5 @@ Einddeliverable:
  - Wanneer de gebruiker verliest is er een eindscherm met zijn score en de optie om terug opnieuw te spelen.
  
 
-
+# Url blog:
+https://sarabluekens.wixsite.com/passionherex
