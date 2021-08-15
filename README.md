@@ -5,7 +5,7 @@ Het JEF festival is een festival voor kinderen tussen de 3 en 12 jaar, waar ze o
 technologie, kunst en wetenschap.
 In de eerste zit had ik hier ook een project voor gemaakt en dat is blijven hangen.
 
-# Concept:
+# Concept
 In de tweede zit waag ik nog eens een poging om een runnergame te maken die bestuurd wordt met gebaren.
 Aangezien het festival al gepasseerd is en de coronacrisis ons nog steeds beperkt heb ik mij gefocused op de desktop variant.
 Concreet:
@@ -15,13 +15,13 @@ Plots krijgt hij een pop-up dat hij een nieuwe telefoon krijgt als hij op de kno
 een virus. Nu zijn alle kleurtjes uit het computerscherm verdwenen. Doorheen het runnerspel moet het kindje in volgorde alle kleurtjes een 5 tal keer verzamelen.
 Maar pasop voor andere virusjes, die moet hij ontwijken. Inhet begin is het spel in grijswaarden, en hoe meer het gastje kleurtjes verzameld, hoe meer kleur er in het spel komt.
 
-# Onderzoeksvraag:
+# Onderzoeksvraag
    Hoe kan ik kinderen tussen 8 en 12 jaar oud op een speelse manier online laten kennis maken met AI? 
    
 Ik heb de leefgroep beperkt vanaf 8 jaar, omdat de kindjes wel al een beetje met een computer moeten kunnen werken aangezien het online staat.
 Ook op het vlak van geletterdheid en motorische ontwikkelingen is het voor 3 jarigen te moeilijk, blijkt uit de research.
 
-# Deliverables:
+# Deliverables
  Tussendoor:
  -  Een runnergame die volledig zelfstandig werkt en met de toetsen bestuurd wordt.
  -  Een met gebaren gestuurde pagina (via de webcam)
@@ -36,5 +36,5 @@ Einddeliverable:
  - Wanneer de gebruiker verliest is er een eindscherm met zijn score en de optie om terug opnieuw te spelen.
  
 
-# Url blog:
+# Url blog
 https://sarabluekens.wixsite.com/passionherex
