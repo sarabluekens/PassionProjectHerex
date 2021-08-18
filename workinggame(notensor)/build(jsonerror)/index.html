@@ -1,0 +1,123 @@
+
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Unity WebGL Player | SneakySam7</title>
+    <link rel="shortcut icon" href="TemplateData/favicon.ico">
+    <link rel="stylesheet" href="TemplateData/style.css">
+    <script src="TemplateData/UnityProgress.js"></script>
+    <script src="Build/UnityLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/posenet"></script>
+    <script>
+      var unityInstance = UnityLoader.instantiate("unityContainer", "Build/build.json", {onProgress: UnityProgress});
+    </script>
+  </head>
+  <body>
+    <div class="webgl-content">
+      <div id="unityContainer" style="width: 960px; height: 600px"></div>
+      <div class="footer">
+        <div class="webgl-logo"></div>
+        <div class="fullscreen" onclick="unityInstance.SetFullscreen(1)"></div>
+        <div class="title">JShook</div>
+      </div>
+    </div>
+    <canvas id="canvas"></canvas>
+    <video id="video" autoplay playsinline muted width="320" height="180" src=""></video>
+
+    <p class="xwaarde"></p>
+    <p class="ywaarde"></p>
+
+    <script type="module">
+
+        // ------------------------------------ globaal ------------------------------------
+        const $video = document.getElementById("video");
+
+        const leftEyeX = document.getElementsByClassName("xwaarde")[0];
+        leftEyeX.classList.add("xCO");
+        leftEyeX.textContent = '';
+
+        const leftEyeY = document.getElementsByClassName("ywaarde")[0];
+        leftEyeY.classList.add("yCO");
+        leftEyeY.textContent = '';
+        
+        let xValue;
+        let player;
+
+        // ------------------------------------ camera ------------------------------------
+
+        const camera = async () => {
+            requestAnimationFrame(render);
+            const options = { audio: false, video: { width: 320, height: 180} };
+            let stream = await navigator.mediaDevices.getUserMedia(options);
+            $video.srcObject = stream;
+
+            if(!$video.captureStream) {
+                $video.captureStream = () => stream;
+            }
+        }
+
+        const render = (time) => {
+            time *= 0.001;  
+            requestAnimationFrame(render);
+        }
+
+        // ------------------------------------ posenet ------------------------------------
+
+            const runPoseNet = async () => {
+                await camera();
+                const net = await posenet.load({
+                inputResolution:{width:640, height:480},
+                scale: 0.5
+                });
+
+                setInterval(() => {
+                    detect(net);
+                }, 500 );
+            };
+        
+        const detect = async (net) => {
+            //make detections
+            const pose = await net.estimateSinglePose(video);
+            // console.log(pose);
+
+            const outputX = pose.keypoints[1].position.x;
+            const outputY = pose.keypoints[1].position.y;
+            if (outputX >= 200 && outputX < 350) {
+                xValue = 3;
+                unityInstance.SendMessage('Player', 'right');
+                // console.log(xValue);
+                } else if (outputX >= 130 && outputX < 200){
+                    xValue = 0;
+                    unityInstance.SendMessage('Player', 'middle');
+                    // console.log(xValue);
+                    } else if (outputX >= 0 && outputX < 130){
+                      xValue = -3;
+                      unityInstance.SendMessage('Player', 'left');
+  
+                        // console.log(xValue);
+                 if (outputY <=50){
+                  unityInstance.SendMessage('Player', 'jump');
+                 }       
+            };
+            // console.log(xValue);
+            
+            leftEyeX.textContent = outputX  
+            leftEyeY.textContent = outputY;
+            document.body.appendChild(leftEyeX);
+            document.body.appendChild(leftEyeY);
+
+            return xValue ;
+        }
+
+        camera();
+        runPoseNet();
+
+</script>
+
+
+  </body>
+</html>
+
